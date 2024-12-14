@@ -13,17 +13,19 @@ model User {
   username     String   @unique
   password String
   activationLink String @unique
+isActivated  Boolean  @default(false)
   createdAt    DateTime @default(now())
   Token        Token[]
 }
 
 
 model Token {
-  id        String   @id @default(uuid())
-  userId    Int      
-  user      User     @relation(fields: [userId], references: [id])
-  token     String   @unique
-  expiresAt DateTime
+  id           String   @id @default(uuid())
+  userId       Int
+  user         User     @relation(fields: [userId], references: [id])
+  refreshToken String
+  expiresAt    DateTime
 }
+
 
 
